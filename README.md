@@ -8,4 +8,4 @@
 |  Como professor eu devo poder visualizar quais são os alunos que estão matriculados em cada disciplina para organizar melhor a distribuição de alunos na sala.  |
 |  Como professor devo ter meu próprio usuário e senha no sistema para lançamento de notas, faltas e postagem de material de estudo.  |
 |  Como aluno devo ter meu próprio usuário e senha no sistema para visualizar minhas notas e materiais de estudo postados pelo professor.  |
-|  Como funcionário da secretaria devo ter meu próprio usuário e senha do sistema para a geração de currículos das matérias a cada semestre  |
+|  Como funcionário da secretaria devo ter meu próprio usuário e senha do sistema para a geração de currículos das matérias a cada semestre.  |
