@@ -1,7 +1,4 @@
-import java.util.Observable;
-import java.util.Observer;
-
-public class Aluno extends Usuario implements Observer {
+public class Aluno extends Usuario implements Observable {
     private Disciplina[] pagamentosPendentes;
 
     public boolean matricular(Disciplina disciplina){
@@ -20,7 +17,19 @@ public class Aluno extends Usuario implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void attach(Observer observer) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void detach(Observer observer) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void notifyObservers() {
         // TODO Auto-generated method stub
         
     }
