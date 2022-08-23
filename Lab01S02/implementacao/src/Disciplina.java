@@ -9,5 +9,6 @@ public class Disciplina {
     }
 
     public boolean isAtiva() {
+        return true;
     }
 }

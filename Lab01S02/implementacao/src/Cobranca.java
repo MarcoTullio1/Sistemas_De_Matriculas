@@ -1,4 +1,7 @@
 public class Cobranca implements Observer {
+
+    Aluno aluno;
+
     private void gerarCobranca() {
     }
 

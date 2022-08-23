@@ -1,19 +1,38 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aluno extends Usuario implements Observable {
-    private Disciplina[] pagamentosPendentes;
+    private List<Disciplina> disciplinasOptativas;
+    private List<Disciplina> disciplinasObrigatorias;
+
+    public Aluno(String nome, Observer observer){
+        super(nome);
+        this.disciplinasObrigatorias = new ArrayList<>();
+        this.disciplinasOptativas = new ArrayList<>();
+    }
 
     public boolean matricular(Disciplina disciplina){
+        return true;
     }
 
     public boolean cancelarMatricula(Disciplina disciplina){
+        return true;
     }
 
-    public Disciplina[] getStateDividas(){
+    public List<Disciplina> getDisciplinasOptativas(){
+        return this.disciplinasOptativas;
+    }
+
+    public List<Disciplina> getDisciplinasObrigatorias(){
+        return this.disciplinasObrigatorias;
     }
 
     public boolean pagarMatricula(Disciplina disciplina){
+        return true;
     }
 
     public String relatorioDeDividas(){
+        return "";
     }
 
     @Override

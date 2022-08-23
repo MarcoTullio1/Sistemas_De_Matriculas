@@ -9,8 +9,10 @@ public class Curso {
     }
 
     public boolean addDisciplina(Disciplina disciplina) {
+        return true;
     }
 
     public boolean atualizarCurso() {
+        return true;
     }
 }
