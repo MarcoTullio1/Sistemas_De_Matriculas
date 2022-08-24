@@ -1,7 +1,7 @@
 | Casos de uso |
 | ------------------- |
-| &nbsp; &nbsp; ![UseCase Diagram0](https://user-images.githubusercontent.com/66282747/185264630-cf420605-e85e-4748-91a6-81d3017f4faf.jpg) &nbsp; &nbsp; |
+| &nbsp; &nbsp; ![Class Diagram1](https://user-images.githubusercontent.com/66282747/186536778-5220483a-83d9-4b52-8839-33575743d04c.jpg) &nbsp; &nbsp; |
 
 | Diagrama de classes |
 | ------------------- |
-| &nbsp; &nbsp; ![image](https://user-images.githubusercontent.com/66282747/186254992-4836b1fd-82ac-4efc-ac70-b868cbe49c31.png) &nbsp; &nbsp; |
+| &nbsp; &nbsp; ![UseCase Diagram1](https://user-images.githubusercontent.com/66282747/186536844-bf4f7c3d-ac84-451c-8727-a7a0cb7136d6.jpg) &nbsp; &nbsp; |
