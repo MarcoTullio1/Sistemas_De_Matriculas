@@ -1,3 +1,5 @@
+package dominio.interfaces;
+
 public interface Observable {
     public void attach(Observer observer);
 
