@@ -25,7 +25,7 @@ public class App {
             int n = Integer.parseInt(line);
             maxConfigs[i] = n;
         }
-        Config.setAlunosPath(DefaultPaths.ALUNOS.getPath());    
+        Config.setAlunosPath(DefaultPaths.ALUNOS.getPath());
         Config.setCursosPath(DefaultPaths.CURSOS.getPath());
         Config.setDisciplinasPath(DefaultPaths.DISCIPLINAS.getPath());
         Config.setProfessorsPath(DefaultPaths.PROFESSORS.getPath());
