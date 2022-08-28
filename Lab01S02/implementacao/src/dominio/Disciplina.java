@@ -3,21 +3,24 @@ package dominio;
 import config.Config;
 import dominio.enums.TipoDisciplina;
 
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-public class Disciplina {
+public class Disciplina implements Serializable {
+    private static final long serialVersionUID = 1256421523585360625L;
+
+
     private static final int MAX_ALUNOS = Config.getMaxAlunosPorDisciplina();
     private String nome;
-    private double preco;
 
     protected TipoDisciplina tipo;
 
     protected Set<Aluno> alunosMatriculados;
 
-    public Disciplina(String nome, double preco, TipoDisciplina tipo) {
+    public Disciplina(String nome, TipoDisciplina tipo) {
         this.nome = nome;
-        this.preco = preco;
         this.alunosMatriculados = new HashSet<>();
         this.tipo = tipo;
     }
@@ -52,5 +55,17 @@ public class Disciplina {
 
     public String getNome(){
         return this.nome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        Disciplina that = (Disciplina) o;
+        return getNome().equals(that.getNome());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNome());
     }
 }

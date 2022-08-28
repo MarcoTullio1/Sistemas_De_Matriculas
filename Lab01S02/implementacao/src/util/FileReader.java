@@ -32,8 +32,9 @@ public class FileReader<T> {
     public Set<T> carregarSetObjetosDeArquivoTexto(String path){
         T object = null;
         Set<T> objects = new HashSet<>();
+        ObjectInputStream file = null;
         try{
-            ObjectInputStream file = new ObjectInputStream(new FileInputStream(path));
+            file = new ObjectInputStream(new FileInputStream(path));
             do{
                 object = (T) file.readObject();
                 objects.add(object);
@@ -45,6 +46,6 @@ public class FileReader<T> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new HashSet<>();
+        return objects;
     }
 }

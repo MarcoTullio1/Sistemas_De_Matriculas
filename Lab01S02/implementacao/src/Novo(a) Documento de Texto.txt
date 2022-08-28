@@ -1,0 +1,35 @@
+#Main Menu
+1 - Área do aluno
+2 - Área do professor
+3 - Secretaria
+4 - Sair
+#Aluno
+1 - Logar
+2 - Cadastrar
+3 - Voltar
+#Aluno
+1 - Visualizar disciplinas matriculadas
+2 - matricular em alguma disciplina
+3 - cancelar matricula
+4 - sair
+#Professor
+1 - Logar
+2 - Cadastrar
+3 - Voltar
+#Professor
+1 - Visualizar alunos cadastrados
+2 - Sair
+#Secretaria
+1 - Logar
+2 - Voltar
+#Secretaria
+1 - Cadastrar curso
+2 - Cadastrar disciplina
+3 - Atualizar ementa do curso
+4 - Visualizar
+5 - Sair
+#Secretaria
+1 - Visualizar cursos
+2 - Visualizar alunos
+3 - Visualizar professores
+4 - Visualizar disciplinas

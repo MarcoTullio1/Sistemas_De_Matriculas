@@ -2,7 +2,10 @@ package dominio;
 
 import dominio.interfaces.Observer;
 
-public class Financeiro implements Observer {
+import java.io.Serializable;
+
+public class Financeiro implements Observer, Serializable {
+    private static final long serialVersionUID = 52541928360625L;
 
     Aluno aluno;
 

@@ -1,14 +1,16 @@
 package dominio;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Curso {
+public class Curso implements Serializable {
+    private static final long serialVersionUID = 2806431254625L;
     private String nome;
     private int creditos;
     private Set<Disciplina> disciplinas;
 
-    public Curso(String nome, int creditos) {
+    public Curso(String nome) {
         this.nome = nome;
         this.creditos = creditos;
         this.disciplinas = new HashSet<>();
@@ -21,5 +23,13 @@ public class Curso {
 
     public void atualizarCurso() {
         //Ler do arquivo do curso as disciplinas.
+    }
+
+    public void setCreditos(int creditos){
+        this.creditos = creditos;
+    }
+
+    public String getNome(){
+        return this.nome;
     }
 }

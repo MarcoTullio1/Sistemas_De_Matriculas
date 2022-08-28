@@ -1,13 +1,13 @@
 package dominio;
 
-import java.util.List;
+import java.util.Set;
 
 public class Secretaria {
-    private List<Professor> professors;
-    private List<Aluno> alunos;
-    private List<Disciplina> disciplinas;
+    private Set<Professor> professors;
+    private Set<Aluno> alunos;
+    private Set<Disciplina> disciplinas;
 
-    public Secretaria(List<Professor> professors, List<Aluno> alunos, List<Disciplina> disciplinas){
+    public Secretaria(Set<Professor> professors, Set<Aluno> alunos, Set<Disciplina> disciplinas){
         this.alunos = alunos;
         this.disciplinas = disciplinas;
         this.professors = professors;
@@ -21,4 +21,32 @@ public class Secretaria {
     public boolean logar() {
         return true;
     }
+
+    public Set<Professor> getProfessors() {
+        return professors;
+    }
+
+    public void addProfessor(Professor professor) throws Exception{
+        if(professors.add(professor)) return;
+        throw new Exception("Professor já cadastrado!");
+    }
+
+    public Set<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void addAluno(Aluno aluno) throws Exception{
+        if(alunos.add(aluno)) return;
+        throw new Exception("Aluno já cadastrado!");
+    }
+
+    public Set<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void addDisciplina(Disciplina disciplina) throws Exception{
+        if(disciplinas.add(disciplina)) return;
+        throw new Exception("Disciplina já cadastrada!");
+    }
+
 }

@@ -4,19 +4,31 @@ import dominio.enums.TipoDisciplina;
 import dominio.interfaces.Observable;
 import dominio.interfaces.Observer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class Aluno extends Usuario implements Observable {
-    private List<Disciplina> disciplinas;
+public class Aluno extends Usuario implements Observable, Serializable {
+    private static final long serialVersionUID = 2806421523585360625L;
+
+    private Set<Disciplina> disciplinas;
     private List<Observer> observers;
 
-    public Aluno(String nome, Observer observer){
-        super(nome);
-        this.disciplinas = new ArrayList<>();
+    public Aluno(String nome, String senha,Observer observer){
+        super(nome, senha);
+        this.disciplinas = new HashSet<>();
+        this.observers = new ArrayList<>();
+        attach(observer);
+    }
+    public Aluno(String nome, String senha){
+        super(nome, senha);
+        this.disciplinas = new HashSet<>();
+        this.observers = new ArrayList<>();
     }
 
-    public List<Disciplina> getDisciplinas(){
+    public Set<Disciplina> getDisciplinas(){
         return this.disciplinas;
     }
 
@@ -25,11 +37,6 @@ public class Aluno extends Usuario implements Observable {
         return (int) disciplinas.stream()
                 .filter(disciplina -> disciplina.getTipo().getQuantidadeMax() == tipo.getQuantidadeMax())
                 .count();
-    }
-
-    @Override
-    public void cadastrar() {
-
     }
 
     @Override
@@ -46,4 +53,5 @@ public class Aluno extends Usuario implements Observable {
     public void notifyObservers() {
         observers.forEach(Observer::update);
     }
+
 }

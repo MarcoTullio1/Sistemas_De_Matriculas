@@ -1,15 +1,13 @@
 package dominio;
 
-public class Professor extends Usuario {
+import java.io.Serializable;
+
+public class Professor extends Usuario implements Serializable {
+    private static final long serialVersionUID = 5235234185360625L;
     private Disciplina[] disciplinas;
 
-    public Professor(String nome){
-        super(nome);
-    }
-
-    @Override
-    public void cadastrar() {
-
+    public Professor(String nome, String senha){
+        super(nome, senha);
     }
 
     public String verAlunosMatriculados(Disciplina disciplina){
