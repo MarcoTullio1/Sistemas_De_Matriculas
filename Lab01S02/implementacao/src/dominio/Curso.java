@@ -12,6 +12,7 @@ public class Curso implements Serializable {
 
     public Curso(String nome) {
         this.nome = nome;
+        // não sei pra q isso serve D:
         this.creditos = creditos;
         this.disciplinas = new HashSet<>();
     }
@@ -19,10 +20,6 @@ public class Curso implements Serializable {
     public void addDisciplina(Disciplina disciplina) throws Exception{
         if(this.disciplinas.add(disciplina)) return;
         throw new Exception("Houve um erro ao adicionar a disciplina " + disciplina.getNome() );
-    }
-
-    public void atualizarCurso() {
-        //Ler do arquivo do curso as disciplinas.
     }
 
     public void setCreditos(int creditos){

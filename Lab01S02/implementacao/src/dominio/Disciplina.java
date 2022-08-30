@@ -26,14 +26,14 @@ public class Disciplina implements Serializable {
     }
 
     public void matricularAluno(Aluno novo) throws Exception{
-        if(novo.getQtdDisciplinasPorTipo(this.tipo) < this.tipo.getQuantidadeMax()){
+        if(novo.getQtdDisciplinasPorTipo(this.tipo) < this.tipo.getQuantidadeMax() && this.getAlunosMatriculados().size() < MAX_ALUNOS){
             this.alunosMatriculados.add(novo);
             novo.getDisciplinas().add(this);
             return;
         }
         throw new Exception("Houve um erro ao matricular o aluno " + novo.getNome());
     }
-    public void removerMatricula(Aluno novo) throws Exception{
+    public void removerMatricula(Aluno novo) {
         if(alunosMatriculados.remove(novo)){
             novo.getDisciplinas().remove(this);
             return;

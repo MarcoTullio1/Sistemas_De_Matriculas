@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+
+//Senha da secretaria: root
+
 public class App {
 
     static Set<Disciplina> disciplinas;
@@ -22,8 +25,9 @@ public class App {
     static Menu alunoLogadoMenu;
     static Menu professorMenu;
     static Menu professorLogadoMenu;
-    static Menu secretariaMenu;
     static Menu secretariaLogadaMenu;
+
+    static Menu visualizarObjetosMenu;
 
     public static void main(String[] args) {
         init();
@@ -108,19 +112,19 @@ public class App {
     static void criarProfessor(String nome, String senha){
         Professor novo = new Professor(nome, senha);
         professors.add(novo);
-        salvarObjetos(alunos, Config.getProfessorsPath());
+        salvarObjetos(professors, Config.getProfessorsPath());
     }
 
     static void criarDisciplina(String nome, TipoDisciplina tipo){
         Disciplina nova = new Disciplina(nome, tipo);
         disciplinas.add(nova);
-        salvarObjetos(alunos, Config.getDisciplinasPath());
+        salvarObjetos(disciplinas, Config.getDisciplinasPath());
     }
 
     static void criarCurso(String nome){
         Curso novo = new Curso(nome);
         cursos.add(novo);
-        salvarObjetos(alunos, Config.getCursosPath());
+        salvarObjetos(cursos, Config.getCursosPath());
     }
 
     static<T> void salvarObjetos(Set<T> objects, String path){
@@ -135,7 +139,6 @@ public class App {
         Map<Integer, String> alunoLogadoMenuOptions = new HashMap<>();
         Map<Integer, String> professorMenuOptions = new HashMap<>();
         Map<Integer, String> professorLogadoMenuOptions = new HashMap<>();
-        Map<Integer, String> secretariaMenuOptions = new HashMap<>();
         Map<Integer, String> secretariaLogadaMenuOptions = new HashMap<>();
         Map<Integer, String> visualizarObjetosOptions = new HashMap<>();
 
@@ -159,22 +162,25 @@ public class App {
         professorLogadoMenuOptions.put(1, "Visualizar alunos cadastrados");
         professorLogadoMenuOptions.put(2, "Sair");
 
-        secretariaMenuOptions.put(1, "Logar");
-        secretariaMenuOptions.put(2, "Sair");
-
         secretariaLogadaMenuOptions.put(1,"Cadastrar curso");
         secretariaLogadaMenuOptions.put(2, "Cadastrar disciplina");
         secretariaLogadaMenuOptions.put(3, "Atualizar ementa do curso");
         secretariaLogadaMenuOptions.put(4, "Visualizar");
         secretariaLogadaMenuOptions.put(5, "Sair");
 
+        visualizarObjetosOptions.put(1, "Visualizar alunos");
+        visualizarObjetosOptions.put(2, "Visualizar cursos");
+        visualizarObjetosOptions.put(3, "Visualizar professores");
+        visualizarObjetosOptions.put(4, "Visualizar disciplinas");
+        visualizarObjetosOptions.put(5, "Sair");
+
         mainMenu = new Menu("Main Menu", "Sistema de gestão acadêmica", mainMenuOptions);
         alunoMenu = new Menu("Aluno", "Area do aluno", alunoMenuOptions);
         alunoLogadoMenu = new Menu("Aluno", "Bem vindo", alunoLogadoMenuOptions);
         professorMenu = new Menu("Professor", "Area do professor", professorMenuOptions);
         professorLogadoMenu = new Menu("Professor", "Bem vindo", professorLogadoMenuOptions);
-        secretariaMenu = new Menu("Secretaria", "Area da secretaria", secretariaMenuOptions);
         secretariaLogadaMenu = new Menu("Secretaria", "Bem vindo", secretariaLogadaMenuOptions);
+        visualizarObjetosMenu = new Menu("Visualizar", "", visualizarObjetosOptions);
     }
 
     static void mainMenuHandler(){
@@ -187,15 +193,24 @@ public class App {
                 break;
             }
             case 2:{
-                System.out.println(alunos);
+                professorMenuHandler(input);
                 break;
             }
             case 3:{
-
+                secretariaLogadaMenu.subMenu();
+                System.out.println("Senha:");
+                if(input.nextLine().equals("root")){
+                    secretariaLogadaMenuHandler(input);
+                }else{
+                    System.err.println("Senha inválida");
+                    Menu.pausaTeclado(input);
+                    mainMenuHandler();
+                }
                 break;
             }
             default: mainMenuHandler();
         }
+        mainMenuHandler();
     }
 
     // Menu do aluno section
@@ -281,12 +296,149 @@ public class App {
     }
     //end Menu do aluno section
 
-
     // Menu do professor section
 
+
+    static void professorMenuHandler(Scanner input){
+        List<Integer> professorMenuOptionList = new ArrayList<>(Arrays.asList(1,2,3));
+        professorMenu.mainMenu();
+
+        switch (Menu.optionHandler(input.nextLine(), professorMenuOptionList)){
+            case 1:{
+                System.out.println("Digite o nome do professor");
+                String nome = input.nextLine();
+                System.out.println("Digite a senha do professor");
+                String senha = input.nextLine();
+                Optional<Professor> professor = professors.stream().
+                        filter(p -> p.equals(new Professor(nome, senha)))
+                        .findFirst();
+                professor.ifPresentOrElse(p -> professorLogadoMenuHandler(input, p), () ->{System.err.println("Aluno não encontrado!"); return;});
+                break;
+            }
+            case 2:{
+                System.out.println("Digite o nome do novo professor");
+                String nome = input.nextLine();
+                System.out.println("Digite a senha do novo professor");
+                String senha = input.nextLine();
+                criarProfessor(nome, senha);
+                break;
+            }
+            case 3: return;
+            default: professorMenuHandler(input);
+        }
+        professorMenuHandler(input);
+    }
+
+    static void professorLogadoMenuHandler(Scanner input, Professor professor){
+        List<Integer> menuValidOptionsList = new ArrayList<>(Arrays.asList(1, 2));
+        professorLogadoMenu.mainMenu();
+
+        switch(Menu.optionHandler(input.nextLine(), menuValidOptionsList)){
+            case 1:{
+                StringBuilder sb = new StringBuilder();
+                if(professor.getDisciplinas().isEmpty()){
+                    System.err.println("Não há disciplinas cadastradas para este professor!");
+                    Menu.pausaTeclado(input);
+                }
+                for(Disciplina d : professor.getDisciplinas()){
+                    sb.append(d.getNome()+ "\nAlunos:");
+                    for(Aluno a : d.getAlunosMatriculados()){
+                        sb.append(a.getNome());
+                    }
+                }
+                System.out.println(sb.toString());
+                break;
+            }
+            case 2: return;
+
+            default: professorLogadoMenuHandler(input,professor);
+        }
+    }
     // end Menu do professor section
 
     // Menu da secretaria section
+
+    static void secretariaLogadaMenuHandler(Scanner input){
+        List<Integer> menuValidOptionsList = new ArrayList<>(Arrays.asList(1, 2,3,4,5));
+        secretariaLogadaMenu.mainMenu();
+
+        switch(Menu.optionHandler(input.nextLine(), menuValidOptionsList)){
+            case 1:{
+                //cadastrar curso;
+                Menu.clearScreen();
+                System.out.println("Nome do curso: ");
+                criarCurso(input.nextLine());
+                break;
+            }
+            case 2:{
+                //cadastrar disciplina;
+                Menu.clearScreen();
+                System.out.println("Nome da disciplina: ");
+                String nomeDisciplina = input.nextLine();
+                System.out.println("Tipo de disciplina:\nOBRIGATORIA ou OPCIONAL");
+                String tipoDisciplina = input.nextLine();
+                if(tipoDisciplina.equalsIgnoreCase(TipoDisciplina.OBRIGATORIA.name()) || tipoDisciplina.equalsIgnoreCase(TipoDisciplina.OPTATIVA.name()))
+                    criarDisciplina(nomeDisciplina, TipoDisciplina.valueOf(tipoDisciplina.toUpperCase()));
+                else {
+                    System.err.println("Tipo inválido!");
+                    Menu.pausaTeclado(input);
+                }
+                    secretariaLogadaMenuHandler(input);
+                break;
+            }
+            case 3:{
+                //cadastrar ementa do curso;
+
+                break;
+            }
+            case 4:{
+                visualizarObjetosHandler(input);
+                break;
+            }
+            case 5:{
+                //sair;
+                return;
+            }
+            default: secretariaLogadaMenuHandler(input);
+        }
+        secretariaLogadaMenuHandler(input);
+    }
+
+    /*
+1 - Visualizar cursos
+2 - Visualizar alunos
+3 - Visualizar professores
+4 - Visualizar disciplinas
+     */
+
+    static void visualizarObjetosHandler(Scanner input){
+        List<Integer> menuValidOptionsList = new ArrayList<>(Arrays.asList(1, 2,3,4,5));
+
+        visualizarObjetosMenu.mainMenu();
+
+        switch (Menu.optionHandler(input.nextLine(), menuValidOptionsList)){
+            case 1:{
+                printarTodosOsAlunos();
+                break;
+            }
+            case 2:{
+                printarTodosOsCursos();
+                break;
+            }
+            case 3:{
+                printarTodosOsProfessores();
+                break;
+            }
+            case 4:{
+                printarTodasAsDisciplinas();
+                break;
+            }
+            case 5: return;
+            default: visualizarObjetosHandler(input);
+        }
+        Menu.pausaTeclado(input);
+        visualizarObjetosHandler(input);
+    }
 
     // end Menu da secretaria section
 

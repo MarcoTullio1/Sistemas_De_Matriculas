@@ -13,11 +13,6 @@ public class Secretaria {
         this.professors = professors;
     }
 
-    public void gerarCurriculo(Curso curso, Disciplina[] disciplinas) {
-        //atualizar o arquivo do curso com as disciplinas.
-
-    }
-
     public boolean logar() {
         return true;
     }
