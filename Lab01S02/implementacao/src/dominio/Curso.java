@@ -12,14 +12,13 @@ public class Curso implements Serializable {
 
     public Curso(String nome) {
         this.nome = nome;
-        // não sei pra q isso serve D:
         this.creditos = creditos;
         this.disciplinas = new HashSet<>();
     }
 
     public void addDisciplina(Disciplina disciplina) throws Exception{
         if(this.disciplinas.add(disciplina)) return;
-        throw new Exception("Houve um erro ao adicionar a disciplina " + disciplina.getNome() );
+        throw new Exception("Houve um erro ao adicionar a disciplina ");
     }
 
     public void setCreditos(int creditos){
@@ -28,5 +27,9 @@ public class Curso implements Serializable {
 
     public String getNome(){
         return this.nome;
+    }
+
+    public Set<Disciplina> getDisciplinas(){
+        return this.disciplinas;
     }
 }

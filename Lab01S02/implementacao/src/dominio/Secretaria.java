@@ -44,4 +44,8 @@ public class Secretaria {
         throw new Exception("Disciplina já cadastrada!");
     }
 
+    public void gerarEmentaCurso(Curso curso, Disciplina disc) throws Exception {
+        curso.addDisciplina(disc);
+    }
+
 }
