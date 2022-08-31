@@ -4,4 +4,4 @@
 
 | Diagrama de classes |
 | ------------------- |
-| &nbsp; &nbsp; ![UseCase Diagram1](https://user-images.githubusercontent.com/66282747/186536844-bf4f7c3d-ac84-451c-8727-a7a0cb7136d6.jpg) &nbsp; &nbsp; |
+| &nbsp; &nbsp; ![image](https://user-images.githubusercontent.com/83794498/187584870-3d91eb75-1b79-4f9e-9baf-bcffcb4bdf2c.png) &nbsp; &nbsp; |
